@@ -68,6 +68,8 @@ FJN requires a **multi-cloud solution (AWS + GCP)** to **avoid vendor lock-in** 
 ---
 
 ## Recommended Workflow  
+## Workflow Diagram
+![Multi-Cloud K3s Deployment Workflow](project1.png)
 
 ```plaintext
 1️⃣ Provision AWS EC2 & GCP VMs (via GUI)
