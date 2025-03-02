@@ -80,7 +80,7 @@ HCS requires this **home automation and homelab infrastructure** to be **distrib
 ---
 
 ## Recommended Workflow  
-
+![Multi-Cloud K3s Deployment Workflow](images/project3.png)
 ```plaintext
 1️⃣ Provision AWS EC2 & GCP VMs (via GUI)
 2️⃣ Use Ansible to install K3s & Docker
