@@ -8,7 +8,8 @@ Your company, **Global Edge Solutions (GES)**, is contracted by **Frontline Jour
 - **Media Storage & Streaming** – Journalists can upload, store, and stream video reports.  
 - **Private Communication** – Teams coordinate securely using encrypted messaging.  
 - **Self-Hosted Knowledge Management** – Reporters and analysts store research and notes.  
-- **Internal Version Control** – Developers maintain the platform with a private Git repository.  
+- **Internal Version Control** – Developers maintain the platform with a private Git repository.
+- **Unified Dashboard for Service Access** – Users need a single centralized interface to access all deployed services.  
 
 FJN requires a **multi-cloud solution (AWS + GCP)** to **avoid vendor lock-in** and ensure **high availability**, with **automated deployments and cloud storage integration**.  
 
@@ -30,7 +31,8 @@ FJN requires a **multi-cloud solution (AWS + GCP)** to **avoid vendor lock-in** 
 - **Plex Media Server** *(NodePort, storing media in an S3 bucket)*  
 - **Matrix/Synapse & Element** *(Encrypted messaging for secure communication)*  
 - **Gitea** *(Self-hosted Git for internal development)*  
-- **Obsidian** *(Self-hosted note-taking & knowledge management)*  
+- **Obsidian** *(Self-hosted note-taking & knowledge management)*
+- **Ferdium** (Integrated dashboard for centralizing access to all services)
 
 ### ✅ Integrate AWS Services *(Mandatory: EC2, S3, and one additional AWS tool)*  
 - **EC2** – Deploy virtual machines for K3s cluster.  
@@ -38,7 +40,8 @@ FJN requires a **multi-cloud solution (AWS + GCP)** to **avoid vendor lock-in** 
 - **Third AWS Tool (Choose One)**:  
   - **AWS RDS** – Managed database for services.  
   - **AWS CloudWatch** – Monitoring and logging.  
-  - **AWS Secrets Manager** – Secure storage for credentials.  
+  - **AWS Secrets Manager** – Secure storage for credentials.
+  - **any other tool**
 
 ### ✅ Upload & Access Demo Content  
 - **Record a project demo/video** and upload to an **S3 bucket**.  
@@ -60,7 +63,7 @@ FJN requires a **multi-cloud solution (AWS + GCP)** to **avoid vendor lock-in** 
 - **Install K3s** on all nodes.  
 - **Install Docker** on the machine hosting the Kubernetes management tool.  
 - **Deploy Kubernetes management tool** in Docker (Rancher, Portainer, or Lens).  
-- **Deploy all services** (Plex, Matrix/Synapse, Gitea, Obsidian) in Kubernetes.  
+- **Deploy all services** (Plex, Matrix/Synapse, Gitea, Obsidian, Ferdium ) in Kubernetes.  
 
 ### **Docker**  
 - **Runs the Kubernetes management tool** *(Rancher, Portainer, or Lens) in a standalone container*.  
@@ -75,7 +78,7 @@ FJN requires a **multi-cloud solution (AWS + GCP)** to **avoid vendor lock-in** 
 1️⃣ Provision AWS EC2 & GCP VMs (via GUI)
 2️⃣ Use Ansible to install K3s & Docker
 3️⃣ Deploy Kubernetes management tool (Rancher, Portainer, Lens in Docker)
-4️⃣ Deploy Plex, Matrix/Synapse, Gitea, and Obsidian in Kubernetes (via Ansible)
+4️⃣ Deploy Plex, Matrix/Synapse, Gitea, Obsidian, Ferdium in Kubernetes (via Ansible)
 5️⃣ Integrate AWS S3 for Plex media storage
 6️⃣ Deploy additional AWS feature (RDS, CloudWatch, or Secrets Manager)
 7️⃣ Test & verify all services via browser
