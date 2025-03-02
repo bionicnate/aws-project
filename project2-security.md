@@ -79,7 +79,7 @@ UCD requires this solution to be **deployed across AWS and GCP**, **self-hosted 
 ---
 
 ## Recommended Workflow  
-
+![Multi-Cloud K3s Deployment Workflow](images/project2.png)
 ```plaintext
 1️⃣ Provision AWS EC2 & GCP VMs (via GUI)
 2️⃣ Use Ansible to install K3s & Docker
