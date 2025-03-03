@@ -118,7 +118,7 @@ This project will deploy **red team cybersecurity tools** within a **K3s-based K
 7️⃣ Test & verify all red team tools via browser
 8️⃣ Screen record demo & upload to S3
 9️⃣ Secure remote access via Twingate (Optional)
-
+```
 
 ## Recommended Workflow  
 ![Multi-Cloud K3s Deployment Workflow](images/project2.png)
