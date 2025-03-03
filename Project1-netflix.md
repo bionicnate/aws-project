@@ -47,7 +47,7 @@ This project will deploy **Jellyfin**, a self-hosted **media streaming platform*
   - **EC2** – Deploy virtual machines for the media streaming platform.  
   - **S3** – Store backups, metadata, and library content.  
 
-- **Choose 3 Additional AWS Services from the Following:**  
+- **Select 3 additional AWS services to enhance your project. Below are 5 recommended options:**  
   - **AWS CloudFront** – Content Delivery Network (CDN) to optimize and cache media streaming.  
   - **AWS RDS** – Managed database service for metadata storage and user accounts.  
   - **AWS Lambda** – Automate media processing tasks (e.g., metadata updates, file organization).  
