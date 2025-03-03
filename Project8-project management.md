@@ -55,7 +55,7 @@ This solution will be deployed across **AWS and GCP** using **K3s for lightweigh
   - **EC2** – Deploy virtual machines for the project management cluster.  
   - **S3** – Secure storage for project backups, documents, and demo recordings.  
 
-- **Choose 3 Additional AWS Services from the Following:**  
+- **Select 3 additional AWS services to enhance your project. Below are 5 recommended options:**
   - **AWS CodePipeline** – Automates **CI/CD for project updates**.  
   - **AWS SNS** – Sends **real-time alerts** for operational events.  
   - **AWS Lambda** – Automates **routine tasks** like status updates.  
