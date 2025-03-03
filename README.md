@@ -27,6 +27,11 @@ https://docs.linuxserver.io/images/docker-ferdium/
 ### project 6 links
 
 ### project 7 links
+https://github.com/writefreely/writefreely/tree/develop
+https://docs.linuxserver.io/images/docker-readarr/
+https://docs.linuxserver.io/images/docker-calibre-web/
+https://www.audiobookshelf.org/docs#docker-compose-install
+https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 8 links
 https://github.com/zulip/docker-zulip?tab=readme-ov-file#readme
