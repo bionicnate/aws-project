@@ -60,8 +60,6 @@ This project will deploy **red team cybersecurity tools** within a **K3s-based K
   - **AWS Secrets Manager** – **Secure storage of SOC credentials and API keys**.  
   - **AWS Lambda** – **Automated security event processing and attack chain analysis**.  
 
----
-
 ### ✅ **Upload & Access Demo Content**  
 - **Record a project demo/video** and upload to an **S3 bucket**.  
 - **Ensure all engagement reports, payloads, and attack logs are functional**.  
