@@ -53,7 +53,7 @@ This project will deploy **red team cybersecurity tools** within a **K3s-based K
   - **EC2** – Deploy virtual machines for the red team operations cluster.  
   - **S3** – Secure storage for logs, payloads, and engagement reports.  
 
-- **Choose 3 Additional AWS Services from the Following:**  
+- **Select 3 additional AWS services to enhance your project. Below are 5 recommended options:**  
   - **AWS GuardDuty** – Automated **threat detection and adversary tracking**.  
   - **AWS Security Hub** – **Centralized security intelligence & compliance insights**.  
   - **AWS CloudWatch** – **Real-time monitoring of attack traffic and system logs**.  
