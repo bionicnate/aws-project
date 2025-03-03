@@ -1,13 +1,25 @@
 # **AWS Project Thread 1: Self-Hosted Streaming & Media Management Platform for Deployed Military Personnel**  
 
-## **Scenario: Military Media Access in Remote & Secure Environments**  
+## **Background**  
+The **U.S. military** operates in locations where **internet connectivity is limited, restricted, or non-existent**. Streaming services such as **Netflix, Hulu, and Disney+** are often unavailable due to **network restrictions or licensing issues**, limiting access to **entertainment, training videos, and unit-level multimedia content**.  
 
-### **Background**  
-The **U.S. military** operates in locations where **internet connectivity is limited, restricted, or non-existent**. Streaming services such as **Netflix, Hulu, and Disney+ are often unavailable** due to network restrictions or licensing issues. This limits the ability of service members to access entertainment, training videos, or unit-level multimedia content.  
+The **Morale, Welfare, and Recreation (MWR) programs** need a **self-hosted, locally managed media streaming solution** that allows military personnel to **store, organize, and stream movies, TV shows, and training content** without requiring external internet access.  
 
-The **Morale, Welfare, and Recreation (MWR) programs** need a **self-hosted, locally managed media streaming solution** that allows military personnel to **store, organize, and stream** movies, TV shows, and military training content without internet dependency.  
+This project will deploy **Jellyfin**, a self-hosted **media streaming platform**, along with **automated media acquisition and management tools**. The system will be **distributed across AWS and GCP** for redundancy, with **Ansible for automation** and **AWS services for storage, caching, security, and access control**.  
 
-This project will deploy **Jellyfin**, a self-hosted **media streaming platform**, along with **automated media acquisition and management tools**, ensuring a **continuous and legally obtained library** of media content. The system will be **distributed across AWS and GCP** for redundancy, with **Ansible for automation** and **AWS services for storage, caching, security, and access control**.  
+### **Military Application**  
+- Provides a **self-hosted, legal media streaming solution** for **deployed service members**.  
+- Supports **entertainment, morale, and unit-level training content**.  
+- Ensures **24/7 access** to media **without relying on external internet services**.  
+- Reduces **operational security risks** by **keeping media content on private military networks**.  
+- Improves **MWR program effectiveness** by enabling **flexible, on-demand media access**.  
+
+### **Technical Focus**  
+- **Jellyfin** serves as the **primary self-hosted streaming platform**.  
+- **Radarr, Sonarr, and qBittorrent** automate **media acquisition and organization**.  
+- **K3s-based Kubernetes cluster** deployed across **AWS and GCP** for redundancy.  
+- **Ansible automation** for streamlined **installation and configuration**.  
+- **AWS services** such as **S3 for storage**, **CloudFront for caching**, and **RDS for metadata management** can be integrated to enhance functionality.  
 
 ---
 
@@ -19,7 +31,7 @@ This project will deploy **Jellyfin**, a self-hosted **media streaming platform*
 
 ### ✅ **Use Ansible to Automate**  
 - **Install K3s & Docker** on all nodes.  
-- **Deploy Kubernetes management tool** *(Rancher, Portainer, or Lens in a standalone Docker container)*.  
+- **Deploy Kubernetes management tool** *(Rancher, Portainer, or Lens - deployed via Ansible in a standalone Docker container.)*  
 - **Deploy all media streaming and automation services in K3s**.  
 
 ### ✅ **Deploy & Expose the Following Media Services** *(Accessible via Browser & Local Network Players)*  
@@ -94,6 +106,7 @@ This project will deploy **Jellyfin**, a self-hosted **media streaming platform*
 7️⃣ Test & verify all media tools via browser
 8️⃣ Screen record demo & upload to S3
 9️⃣ Secure remote access via Twingate or Tailscale (Optional)
+
 ```
 ## Workflow Diagram
 ![Multi-Cloud K3s Deployment Workflow](images/project1.png)
