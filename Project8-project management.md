@@ -62,8 +62,6 @@ This solution will be deployed across **AWS and GCP** using **K3s for lightweigh
   - **AWS CloudTrail** – Monitors **account activity for compliance**.  
   - **AWS Secrets Manager** – Securely stores **project credentials and API keys**.  
 
----
-
 ### ✅ **Upload & Access Demo Content**  
 - **Record a project demo/video** and upload to an **S3 bucket**.  
 - **Ensure all project management services are accessible via web browser.**  
