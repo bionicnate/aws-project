@@ -120,3 +120,8 @@ This solution will be deployed across **AWS and GCP** using **K3s for lightweigh
 7️⃣ Test and verify service accessibility via web browser and secure military networks
 8️⃣ Record a project demo/video and upload it to S3
 9️⃣ Optionally, secure remote access with Twingate or Tailscale
+
+```
+
+## Workflow Diagram
+![Multi-Cloud K3s Deployment Workflow](images/project8.png)
