@@ -14,6 +14,11 @@ https://www.ghostwriter.wiki/getting-started/quickstart
 https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 3 links
+https://github.com/AdguardTeam/AdGuardHome
+https://docs.linuxserver.io/images/docker-nextcloud/
+https://docs.linuxserver.io/images/docker-pairdrop/
+https://docs.linuxserver.io/images/docker-homeassistant/
+https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 4 links
 
