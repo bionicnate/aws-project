@@ -36,7 +36,10 @@ https://docs.gitea.com/installation/install-with-docker
 https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 6 links
-
+https://docs.linuxserver.io/images/docker-libreoffice/
+https://github.com/bitwarden/server
+https://github.com/owntracks/docker-recorder
+https://docs.linuxserver.io/images/docker-nextcloud/
 https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 7 links
