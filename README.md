@@ -21,6 +21,11 @@ https://docs.linuxserver.io/images/docker-homeassistant/
 https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 4 links
+https://thelounge.chat/docs
+https://docs.linuxserver.io/images/docker-lychee/
+https://github.com/sysadminsmedia/homebox?tab=readme-ov-file
+https://docs.linuxserver.io/images/docker-nextcloud/
+https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 5 links
 
