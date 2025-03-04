@@ -28,8 +28,16 @@ https://docs.linuxserver.io/images/docker-nextcloud/
 https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 5 links
+https://www.jenkins.io/doc/book/installing/docker/
+https://docs.linuxserver.io/images/docker-code-server/
+https://www.loft.sh/blog/harbor-kubernetes-self-hosted-container-registry
+https://goharbor.io/docs/2.12.0/install-config/
+https://docs.gitea.com/installation/install-with-docker
+https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 6 links
+
+https://docs.linuxserver.io/images/docker-ferdium/
 
 ### project 7 links
 https://github.com/writefreely/writefreely/tree/develop
