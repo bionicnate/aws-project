@@ -1,0 +1,10 @@
+- hosts: all
+
+  vars:
+    vm_ips: "{{ lookup('file', 'vars/vms.yml') | from_yaml }}"
+    ansible_ssh_private_key_file: ~/.ssh/ec2.pem
+
+  tasks:
+    - name: Print VM IPs
+      debug:
+        msg: "VM {{ inventory_hostname }} has IP {{ vm_ips[inventory_hostname] }}" 

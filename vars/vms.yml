@@ -1,0 +1,21 @@
+vm_ips:
+  aws_ip:
+    node5:
+      ip: 18.219.6.98
+      user: ec2-user
+    node2:
+      ip: 3.137.146.53
+      user: ec2-user
+    node4:
+      ip: 3.16.111.127
+      user: ec2-user
+  gce_ip:
+    node1:
+      ip: 35.188.165.226
+      user: nsvenkerud # Replace with the correct GCE username
+    node3:
+      ip: 34.58.30.92
+      user: nsvenkerud # Replace with the correct GCE username
+    master:
+      ip: 34.70.124.213
+      user: nsvenkerud

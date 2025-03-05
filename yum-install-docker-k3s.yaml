@@ -1,0 +1,77 @@
+- hosts: '*master'
+  become: yes
+  tasks:
+    - name: Check if yum exists
+      stat:
+        path: /usr/bin/yum
+      register: yum_exists
+
+    - name: Remove curl-minimal (if yum exists)
+      yum:
+        name: curl-minimal
+        state: absent
+      when: yum_exists.stat.exists
+
+    - name: Update yum package index (if yum exists)
+      yum:
+        update_cache: yes
+      when: yum_exists.stat.exists
+
+    - name: Install required packages for Docker (if yum exists)
+      yum:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+      when: yum_exists.stat.exists
+
+    - name: Install amazon-linux-extras if needed.
+      yum:
+        name: amazon-linux-extras
+        state: present
+      when: yum_exists.stat.exists
+
+    - name: Enable Amazon Linux Extras repository for Docker
+      command: amazon-linux-extras enable docker
+      when: yum_exists.stat.exists
+
+    - name: Install Docker (if yum exists)
+      yum:
+        name:
+          - docker
+        state: present
+      when: yum_exists.stat.exists
+
+    - name: Enable and start Docker service
+      systemd:
+        name: docker
+        enabled: yes
+        state: started
+      when: yum_exists.stat.exists
+
+    - name: Add user to the Docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+      when: yum_exists.stat.exists
+
+    - name: Install K3s
+      shell: |
+        curl -sfL https://get.k3s.io | sh -
+      args:
+        creates: /etc/rancher/k3s/k3s.yaml
+      when: yum_exists.stat.exists
+
+    - name: Set permissions for K3s config
+      file:
+        path: /etc/rancher/k3s/k3s.yaml
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: "0600"
+      when: yum_exists.stat.exists
+
+    - name: Verify kubectl version
+      command: kubectl version --client
+      when: yum_exists.stat.exists
