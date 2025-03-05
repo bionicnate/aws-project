@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amazon Web Services Project</title>
+    <style>
+        body {
+            font-family: 'Bahnschrift', sans-serif;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #d4d4d4;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-left: 290px;
+            overflow-y: auto;
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .slide {
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #282828;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #b5cea8;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #9cdcfe;
+        }
+
+        .text, .code {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .code {
+            background-color: #3f3f3f;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        ol, ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .executive-summary {
+            background-color: #3f3f3f;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            color: #e0e0e0;
+        }
+
+        .executive-summary h2 {
+            font-size: 32px;
+            color: #c5e1a5;
+            margin-bottom: 15px;
+        }
+
+        .executive-summary p {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        /* Header and Footer Styles */
+        header, footer {
+            color: #d4d4d4;
+            text-align: center;
+            padding: 10px 0;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0);
+            position: fixed;
+            top: 0;
+        }
+
+        footer {
+            background-color: #333;
+            position: static;
+            margin-top: auto;
+        }
+
+        header a, footer a {
+            color: #d4d4d4;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        header a:hover, footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Biography Section Styles */
+        .bio-section {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #444;
+        }
+
+        .bio-section img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .bio-section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Sidebar Text Placeholder */
+        .sidebar-text-placeholder {
+            padding: 20px;
+            border-top: 1px solid #444;
+            margin-top: auto;
+            text-align: center;
+            font-size: 14px;
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bahnschrift&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <a href="#">Header Link 1</a>
+    <a href="#">Header Link 2</a>
+    <a href="#">Header Link 3</a>
+</header>
+
+<div class="sidebar">
+    <div class="bio-section">
+        <img src="placeholder-profile.jpg" alt="Profile Picture">
+        <p>Short biography goes here.</p>
+    </div>
+    <a href="#summary">Project Summary</a>
+    <a href="#slide1">Provision VMs</a>
+    <a href="#slide2">Install K3s & Docker w/Ansible</a>
+    <a href="#slide3">Deploy k3s manangement tool</a>
+    <div class="sidebar-text-placeholder">
+        <p>Placeholder for additional text in the sidebar.</p>
+    </div>
+</div>
+
+<div class="content">
+    <div class="slide" id="summary" data-bg-color="#1e1e1e">
+        <div class="executive-summary">
+            <h2>AWS Project Summary</h2>
+            <h3>Self-Hosted Streaming & Media Management Platform for Deployed Military Personnel</h3>
+            <p>This project will deploy Jellyfin, a self-hosted media streaming platform, along with automated media acquisition and management tools. The system will be distributed across AWS and GCP for redundancy, with Ansible for automation and AWS services for storage, caching, security, and access control</p>
+        </div>
+    </div>
+
+    <div class="slide" id="slide1" data-bg-color="#2c3e50">
+        <div class="title">Provision VMs</div>
+        <p class="text"></p>
+        <ul class="text">
+         <ol>
+            <li>Created 3 AWS EC2 instances, 3 GCE VMs
+              <ul>
+                <li>AWS needs a keypair to connect</li>
+                <li>Modified the security group inbound/outbound to accept TCP:22</li>
+                <li>Added the AWS key to "authorized_hosts" in GCP for ease of use</li>
+              </ul>
+            </li>
+          </ol>
+        </ul>
+    </div>
+
+    <div class="slide" id="slide2" data-bg-color="#34495e">
+        <div class="title">Install K3s & Docker w/Ansible</div>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <ol class="text">
+            <ol>
+                <li>Ran a simple ping module and checked I could access over SSH
+                  <ul>
+                    <li>Made a vars file to differentiate master and node for K3s
+                      <ul>
+                        <li>Specify which hosts with <code>--limit "*master"</code> or <code>--limit "*nodes"</code></li>
+                      </ul>
+                    </li>
+                    <li>Realized I had to add the .pem to every playbook, so I added a line in <code>ansible.cfg</code>: <code>private_key_file = ~/.ssh/ec2.pem</code></li>
+                  </ul>
+                </li>
+                <li>Grabbed previously created Ansible playbook to install K3s
+                  <ul>
+                    <li>Ran into an issue where <code>apt</code> did not exist. The AMI used <code>yum</code> as a package manager, whereas my GCP VM had <code>apt</code>.</li>
+                    <li>Plugged the script into Gemini to configure the playbook for conditional package manager between <code>yum</code> and <code>apt</code>.</li>
+                  </ul>
+                </li>
+              </ol>
+        </ol>
+    </div>
+
+
+    <div class="slide" id="slide3" data-bg-color="#4a6572">
+        <div class="title">Slide 3 Title</div>
+        <h2>Refining the Ansible Playbook</h2>
+        <ol>
+          <li>Encountered package dependency conflicts with <code>curl-minimal</code> on AWS instances.
+            <ul>
+              <li>Modified the playbook to remove <code>curl-minimal</code> before installing Docker dependencies.</li>
+            </ul>
+          </li>
+          <li>Adjusted the playbook to use <code>yum</code> exclusively for AWS instances.
+            <ul>
+              <li>Simplified logic and removed unnecessary <code>apt</code> checks.</li>
+            </ul>
+          </li>
+          <li>Resolved Docker installation issues by using Amazon Linux Extras repository.
+            <ul>
+              <li>Added task to enable the <code>docker</code> extras repository.</li>
+              <li>Simplified Docker installation to use <code>docker</code> package.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+      
+      <div class="slide" id="slide4" data-bg-color="#5c7a89">
+        <div class="title">Slide 4 Title</div>
+        <h2>Troubleshooting Amazon Linux Extras</h2>
+        <ol>
+          <li>Encountered "amazon-linux-extras not found" error on AWS instances.
+            <ul>
+              <li>Identified the instance as Amazon Linux 2023.</li>
+              <li>Added a task to install <code>amazon-linux-extras</code> package if missing.</li>
+            </ul>
+          </li>
+          <li>Resolved repository metadata errors and package conflicts.
+            <ul>
+              <li>Removed incorrect Docker CE Stable repository.</li>
+              <li>Cleaned <code>yum</code> cache and updated repositories.</li>
+              <li>Installed <code>dnf-plugins-core</code> to ensure repository functionality.</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+      
+      <div class="slide" id="slide5" data-bg-color="#6e8fa0">
+        <div class="title">Slide 5 Title</div>
+        <h2>Implementing Sudo Password Variables</h2>
+        <ol>
+          <li>Encountered "Missing sudo password" errors during Ansible execution.
+            <ul>
+              <li>Implemented Ansible Vault to securely store sudo passwords.</li>
+              <li>Modified playbook to use <code>ansible_sudo_pass</code> from Vault.</li>
+              <li>Used <code>--ask-vault-pass</code> to provide Vault password during execution.</li>
+            </ul>
+          </li>
+      
+        </ol>
+      </div>
+      
+      <div class="slide" id="slide6" data-bg-color="#80a4b7">
+        <div class="title">Slide 6 Title</div>
+        <h2>Final K3s Installation and Verification</h2>
+        <ol>
+          <li>Successfully installed K3s on both AWS and GCP instances.
+            <ul>
+              <li>Ensured K3s configuration permissions were correctly set.</li>
+            </ul>
+          </li>
+          <li>Verified K3s installation using <code>kubectl version --client</code>.</li>
+          <li>Tested basic K3s functionality by deploying a simple application.</li>
+        </ol>
+      </div>
+
+    <div class="slide" id="slide7" data-bg-color="#2980b9">
+        <div class="title">Slide 7 Title</div>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="subtitle">Subtitle Example</p>
+    </div>
+</div>
+
+<footer>
+    <a href="#">Footer Link 1</a>
+    <a href="#">Footer Link 2</a>
+    <a href="#">Footer Link 3</a>
+</footer>
+
+<script>
+    window.addEventListener('scroll', function() {
+        const slides = document.querySelectorAll('.slide');
+        const body = document.body;
+
+        slides.forEach(slide => {
+            const rect = slide.getBoundingClientRect();
+            const slideTop = rect.top;
+            const slideBottom = rect.bottom;
+            const windowHeight = window.innerHeight;
+
+            if (slideTop < windowHeight / 2 && slideBottom > windowHeight / 2) {
+                body.style.backgroundColor = slide.dataset.bgColor;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
