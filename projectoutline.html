@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amazon Web Services Project</title>
+    <style>
+        body {
+            font-family: 'Bahnschrift', sans-serif;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            transition: background-color 0.5s ease;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-250px);
+        }
+
+        .sidebar a {
+            display: block;
+            color: #d4d4d4;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            margin-left: 290px;
+            overflow-y: auto;
+            padding-top: 60px;
+            padding-bottom: 40px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .content.collapsed {
+            margin-left: 40px;
+        }
+
+        .slide {
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #282828;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #b5cea8;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #9cdcfe;
+        }
+
+        .text, .code {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .code {
+            background-color: #3f3f3f;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        ol, ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .executive-summary {
+            background-color: #3f3f3f;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            color: #e0e0e0;
+        }
+
+        .executive-summary h2 {
+            font-size: 32px;
+            color: #c5e1a5;
+            margin-bottom: 15px;
+        }
+
+        .executive-summary p {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        /* Header and Footer Styles */
+        header, footer {
+            color: #d4d4d4;
+            text-align: center;
+            padding: 10px 0;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        header {
+            background-color: rgba(51, 51, 51, 0);
+            position: fixed;
+            top: 0;
+        }
+
+        footer {
+            background-color: #333;
+            position: static;
+            margin-top: auto;
+        }
+
+        header a, footer a {
+            color: #d4d4d4;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        header a:hover, footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Biography Section Styles */
+        .bio-section {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #444;
+        }
+
+        .bio-section img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .bio-section p {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Sidebar Text Placeholder */
+        .sidebar-text-placeholder {
+            padding: 20px;
+            border-top: 1px solid #444;
+            margin-top: auto;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* Hamburger Button */
+        .hamburger-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            padding: 10px;
+            background-color: #444;
+            border: none;
+            border-radius: 4px;
+            color: #d4d4d4;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+        }
+
+        .hamburger-button span {
+            width: 100%;
+            height: 3px;
+            background-color: #d4d4d4;
+            border-radius: 2px;
+        }
+
+        .sidebar-collapsed-button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            padding: 10px;
+            background-color: #444;
+            border: none;
+            border-radius: 4px;
+            color: #d4d4d4;
+            display: none; /* Initially hidden */
+        }
+
+        .sidebar.collapsed ~ .sidebar-collapsed-button {
+            display: block;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bahnschrift&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <a href="#">Header Link 1</a>
+    <a<a href="#">Header Link 2</a>
+    <a href="#">Header Link 3</a>
+</header>
+
+<style>
+  .sidebar {
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px); /* Apply blur to create glassmorphism effect */
+      -webkit-backdrop-filter: blur(10px); /* For Safari */
+      border-radius: 10px; /* Optional: Rounded corners */
+      padding: 20px;
+      color: #d4d4d4; /* Keep the text color */
+      /* ... other existing styles ... */
+  }
+
+  .sidebar a, .sidebar p {
+      color: #d4d4d4; /* Keep the link and paragraph text color */
+  }
+
+  .sidebar .bio-section img {
+      border-radius: 50%; /* Keep the circular profile image */
+      /* ... other existing styles ... */
+  }
+
+  /* Playlist Styles */
+  .playlist-link {
+      display: block;
+      color: #d4d4d4;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      position: relative;
+  }
+
+  .playlist-link:hover {
+      background-color: rgba(68, 68, 68, 0.5); /* Slightly transparent hover effect */
+  }
+
+  .playlist-link .justification {
+      display: none;
+      position: absolute;
+      background: rgba(51, 51, 51, 0.8); /* Semi-transparent dark background */
+      padding: 10px;
+      border-radius: 4px;
+      width: 200px;
+      left: 260px; /* Adjust as needed */
+      top: 0;
+      z-index: 1;
+      backdrop-filter: blur(5px); /* Apply blur to the justification box */
+      -webkit-backdrop-filter: blur(5px);
+  }
+
+  .playlist-link:hover .justification {
+      display: block;
+  }
+
+</style>
+
+<div class="sidebar">
+  <div class="hamburger-button">
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+  <div class="bio-section">
+      <img src="placeholder-profile.jpg" alt="Profile Picture">
+      <p>Short biography goes here.</p>
+  </div>
+  <a href="#summary">AWS Project Summary</a>
+  <a href="#slide1">Workflow</a>
+  <a href="#slide1">Provision VMs</a>
+  <a href="#slide2">Install K3s & Docker w/Ansible</a>
+  <a href="#slide3">Deploy k3s manangement tool</a>
+  <a href="#slide4">Deploy Manifests for Jellyfin, Radarr, Sonarr, qBittorrent, and Ferdium</a>
+  <a href="#slide5">Integrate AWS S3 Buckets</a>
+  <a href="#slide6">Deploy Additional Services</a>
+  <a href="#slide7">Test Tools</a>
+  <a href="#slide8">Screen Record</a>
+  <a href="#slide9">Extras</a>
+
+  <div style="margin-top: 20px;">
+      <p id="playlist-toggle" style="cursor: pointer;">☰Playlist</p>
+      <div id="playlist-content" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out;">
+
+          <a href="https://www.youtube.com/watch?v=Y0o042e97jM" class="playlist-link" target="_blank">
+              The Robots - Kraftwerk
+              <div class="justification">Reflects the automation and technical precision involved in deploying and managing infrastructure.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=fXmWvV_a2-I" class="playlist-link" target="_blank">
+              Paranoid Android - Radiohead
+              <div class="justification">Captures the feeling of navigating complex technical environments and troubleshooting potential issues.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=9jACWp6s0jY" class="playlist-link" target="_blank">
+              Digital Bath - Deftones
+              <div class="justification">The digital and technical feel of the song matches the digital nature of the project.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=ajUtm5y7yZ8" class="playlist-link" target="_blank">
+              Iron Man - Black Sabbath
+              <div class="justification">Represents the resilience and power required to overcome technical challenges.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=8NzcHofnL9Y" class="playlist-link" target="_blank">
+              Clair de Lune - Claude Debussy
+              <div class="justification">Provides a moment of tranquility and focus amidst the technical complexity.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=x2KRpRMSu4g" class="playlist-link" target="_blank">
+              Baba O'Riley - The Who
+              <div class="justification">The synthesizer intro and driving rhythm reflect the energy and progress of the project.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=iYYRH4apXDo" class="playlist-link" target="_blank">
+              Space Oddity - David Bowie
+              <div class="justification">Evokes a sense of exploration and discovery in a vast, complex environment.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=uAOR6ib95kQ" class="playlist-link" target="_blank">
+              19-2000 - Gorillaz
+              <div class="justification">The upbeat, electronic vibe fits the technological theme.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=EdvWv0nJj8w" class="playlist-link" target="_blank">
+              Lateralus - Tool
+              <div class="justification">The complex, progressive structure of the song mirrors the intricate nature of the project.</div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=r9-DM9fbt-g" class="playlist-link" target="_blank">
+              Oogway Ascends - Hans Zimmer
+              <div class="justification">Provides a sense of accomplishment and resolution after completing a complex task.</div>
+          </a>
+      </div>
+  </div>
+
+  <div class="sidebar-text-placeholder">
+      <p>Placeholder for additional text in the sidebar.</p>
+  </div>
+</div>
+
+
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const playlistToggle = document.getElementById('playlist-toggle');
+      const playlistContent = document.getElementById('playlist-content');
+
+      playlistToggle.addEventListener('click', function() {
+          if (playlistContent.style.maxHeight === '0px' || playlistContent.style.maxHeight === '') {
+              playlistContent.style.maxHeight = playlistContent.scrollHeight + 'px';
+          } else {
+              playlistContent.style.maxHeight = '0';
+          }
+      });
+  });
+</script>
+
+<button class="sidebar-collapsed-button">☰</button>
+
+<div class="content">
+  <div class="slide" id="summary" data-bg-color="#1e1e1e">
+    <div class="executive-summary">
+        <h1>AWS Project Summary</h2>
+        <h3>Self-Hosted Streaming & Media Management Platform for Deployed Military Personnel</h3>
+        <p>This project will deploy Jellyfin, a self-hosted media streaming platform, along with automated media acquisition and management tools. The system will be distributed across AWS and GCP for redundancy, with Ansible for automation and AWS services for storage, caching, security, and access control</p>
+    </div>
+</div>
+
+<div class="slide" id="summary" data-bg-color="#1e1e1e">
+  <div class="executive-summary">
+      <h1>Workflow</h2>
+  </div>
+</div>
+
+<div class="slide" id="slide1" data-bg-color="#222a2c">
+  <div class="title">Provision VMs</div>
+  <p class="text"></p>
+  <ul class="text">
+      <ol>
+          <li>
+              Created 3 AWS t3micro EC2 instances, 3 GCE VMs
+              <ul>
+                  <li>AWS needs a keypair to connect</li>
+                  <li>
+                      Modified the security group inbound/outbound to accept TCP:22
+                      <ol>
+                          <li>later added additional rules as services were deployed</li>
+                          <li>needed to create additional rule for 0.0.0.0/0 to see worker k3s nodes</li>
+                      </ol>
+                  </li>
+                  <li>added the AWS key to "authorized_hosts" in GCP for ease of use</li>
+                  <li>repeated issues w/ GCE, decided to forgo troubleshooting for the sake of time and focus efforts on AWS</li>
+              </ul>
+          </li>
+          <li>Created additional AWS VM, a t2small to act as control plane</li>
+          <li>Added Amazon CLI v2</li>
+      </ol>
+  </ul>
+</div>
+
+<div class="slide" id="slide2" data-bg-color="#26363a">
+  <div class="title">Install K3s & Docker w/Ansible</div>
+  <p class="text"></p>
+  <ol class="text">
+      <ol>
+          <li>
+              Ran a simple ping module and checked I could access over SSH
+              <ol>
+                  <li>
+                      Made a vars file to differentiate master and node for K3s
+                      <ol>
+                          <li>Specify which hosts with <code>--limit "*master"</code> or <code>--limit "*nodes"</code></li>
+                      </ol>
+                  </li>
+                  <li>Realized I had to add the .pem to every playbook, so I added a line in <code>ansible.cfg</code>: <code>private_key_file = ~/.ssh/ec2.pem</code></li>
+              </ol>
+          </li>
+          <li>
+              Grabbed previously created Ansible playbook to install K3s
+              <ol>
+                  <li>Ran into an issue where <code>apt</code> did not exist. The AMI used <code>yum</code> as a package manager, whereas my GCP VM had <code>apt</code>.</li>
+                  <li>Plugged the script into Gemini to configure the playbook for conditional package manager between <code>yum</code> and <code>apt</code>.</li>
+              </ol>
+          </li>
+          <li>Eventually gave up and rebuilt VMs to all be the same architecture</li>
+          <li>
+              Installed K3s on AWS, added kubectl to worker nodes
+              <ol>
+                  <li>Had to add EC2 SSH keys and change perms for ease of use</li>
+              </ol>
+          </li>
+          <li>
+              Tried to run a combined playbook for K3s and Docker to deconflict Docker install which accidentally removed all my package manager sources, leaving me unable to install or update
+              <ol>
+                  <li>Created a new VM for the K3s master/control plane (3rd time)</li>
+              </ol>
+          </li>
+          <li>Used previous known good Ansible playbook to install Docker</li>
+      </ol>
+  </ol>
+</div>
+
+<div class="slide" id="slide3" data-bg-color="#2a4248">
+  <div class="title">Deploy k3s manangement tool</div>
+  <ol>
+      <li>
+          Installed Portainer on Local
+          <ol>
+              <li>
+                  Added an agent to monitor K8s
+                  <ol>
+                      <li>Connection timeout</li>
+                  </ol>
+              </li>
+              <li>
+                  Added elastic network IP
+                  <ol>
+                      <li>Didn't work, had to reboot VM, reinstall K3s, repurposed VM to node</li>
+                  </ol>
+              </li>
+          </ol>
+      </li>
+      <li>
+          Installed Portainer in Docker on master VM
+          <ol>
+              <li>Wasn't able to connect until after making changes to inbound VPC rules</li>
+          </ol>
+      </li>
+      <li>Added local K8s cluster to monitor</li>
+  </ol>
+</div>
+
+<div class="slide" id="slide4" data-bg-color="#2e4e56">
+    <div class="title">Deploy Manifests for Jellyfin, Radarr, Sonarr, qBittorrent, and Ferdium</div>
+    <ol>
+        <li>
+            Needed to add Python3
+            <ol>
+                <li>Added a virtual environment to the playbook to deploy manifests.</li>
+                <li>Did not work, so got rid of env entirely and copied manifests to /tmp/</li>
+            </ol>
+        </li>
+        <li>Still had to manually install Python "sudo apt install python3-kubernetes"</li>
+        <li>
+            Grabbed a compose file from TechHut for Jellyfin Stack, converted it to a manifest
+            <ol>
+                <li>I used the same technique to install as in the Ansible lab, copying the file to the dest /tmp dir, and use kubectl to apply</li>
+            </ol>
+        </li>
+        <li>Same method of installation for the rest of the "arr-stack"</li>
+        <li>
+            Noticed some pods erroring and evicting, added in some resource limits and that seemed to stop it
+            <ol>
+                <li>kubectl get pods -A</li>
+            </ol>
+        </li>
+        <li>Cleaned up the manifests and combined everything into 2 files, PVC and app deployment</li>
+    </ol>
+</div>
+
+<div class="slide" id="slide5" data-bg-color="#325a64">
+    <div class="title">Integrate S3</div>
+    <ol>
+        <li>Added S3 bucket</li>
+        <li>Uploaded test image</li>
+        <li>Modify IAM role to allow S3 bucket full access by EC2 instances</li>
+        <li>
+            Checked connection to my specific bucket
+            <ol>
+                <li><code>aws s3 ls s3://aws-project-s3bucket-bionicnate</code></li>
+            </ol>
+        </li>
+        <li>Added a user and created an access key, will be used to s3fuse mount the S3 bucket to the node</li>
+        <li>Stored the key on the master, was able to make a mountpoint to point media services to</li>
+    </ol>
+</div>     
+
+
+<div class="slide" id="slide6" data-bg-color="#366672">
+  <div class="title">Deploy Additional Services</div>
+  <ol>
+      <li>
+          Added IVS Chat for live chat service alongside videos
+          <ol>
+              <li>Not available in Ohio :(</li>
+          </ol>
+      </li>
+      <li>Added CloudWatch to keep track of how much data is being used</li>
+      <li>Added auto-scaling instances with user data filled out on the templates to add K3s agent to new VMs</li>
+  </ol>
+</div>
+
+<div class="slide" id="slide7" data-bg-color="#3e6e70">
+  <div class="title">Test Tools</div>
+  <ol>
+      <li>
+          I installed the services locally to ensure images and workflow was sound
+          <ol>
+              <li>Had to convert docker-compose to K8s manifests so a little trial and error was involved</li>
+          </ol>
+      </li>
+  </ol>
+</div>
+
+
+<div class="slide" id="slide8" data-bg-color="#446a71">
+  <div class="title">Screen Record</div>
+  <ol>
+      <li>Screen recorded Ansible installing</li>
+      <li>The pods stopped getting evicted</li>
+      <li>Uploading into S3 bucket</li>
+      <li>Troubleshooting nodes & CPU usage</li>
+  </ol>
+</div>
+
+
+<div class="slide" id="slide9" data-bg-color="#4a6572">
+  <div class="title">Extras</div>
+  <ol>
+      <li>Installed a Twingate AWS Cloud Formation</li>
+      <li>Deployed IT-Tools to troubleshoot IP connectivity (known-good)</li>
+      <li>Installed Homarr to have a dashboard</li>
+  </ol>
+</div>
+
+  <section style="font-family: sans-serif; color: #d4d4d4; background-color: #282828; padding: 20px; border-radius: 8px; margin: 20px auto; max-width: 800px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+    <h2 style="font-size: 24px; margin-bottom: 15px; color: #b5cea8;">AI Generated Playlist</h2>
+    <p style="font-size: 14px; color: #9cdcfe; margin-bottom: 20px;">
+      This playlist reflects the themes of technical challenges, problem-solving, automation, and the overall atmosphere of a complex, distributed system.
+    </p>
+    <ol style="list-style-type: decimal; padding-left: 20px;">
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"The Robots" by Kraftwerk</strong>
+        <p style="font-size: 12px; margin-top: 5px;">Reflects the automation and technical precision involved in deploying and managing infrastructure.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Paranoid Android" by Radiohead</strong>
+        <p style="font-size: 12px; margin-top: 5px;">Captures the feeling of navigating complex technical environments and troubleshooting potential issues.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Digital Bath" by Deftones</strong>
+        <p style="font-size: 12px; margin-top: 5px;">The digital and technical feel of the song matches the digital nature of the project.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Iron Man" by Black Sabbath</strong>
+        <p style="font-size: 12px; margin-top: 5px;">Represents the resilience and power required to overcome technical challenges.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Clair de Lune" by Claude Debussy</strong>
+        <p style="font-size: 12px; margin-top: 5px;">Provides a moment of tranquility and focus amidst the technical complexity.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Baba O'Riley" by The Who</strong>
+        <p style="font-size: 12px; margin-top: 5px;">The synthesizer intro and driving rhythm reflect the energy and progress of the project.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Space Oddity" by David Bowie</strong>
+        <p style="font-size: 12px; margin-top: 5px;">Evokes a sense of exploration and discovery in a vast, complex environment.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"19-2000" by Gorillaz</strong>
+        <p style="font-size: 12px; margin-top: 5px;">The upbeat, electronic vibe fits the technological theme.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Lateralus" by Tool</strong>
+        <p style="font-size: 12px; margin-top: 5px;">The complex, progressive structure of the song mirrors the intricate nature of the project.</p>
+      </li>
+      <li style="margin-bottom: 10px;">
+        <strong style="color: #c5e1a5;">"Oogway Ascends" by Hans Zimmer</strong>
+        <p style="font-size: 12px; margin-top: 5px;">Provides a sense of accomplishment and resolution after completing a complex task.</p>
+      </li>
+    </ol>
+  </section>
+
+</div>
+
+</div>
+
+<footer>
+    <a href="#">Footer Link 1</a>
+    <a href="#">Footer Link 2</a>
+    <a href="#">Footer Link 3</a>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburgerButton = document.querySelector('.hamburger-button');
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.querySelector('.content');
+        const collapsedButton = document.querySelector('.sidebar-collapsed-button');
+
+        hamburgerButton.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        });
+
+        collapsedButton.addEventListener('click', function() {
+            sidebar.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        });
+
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const targetPosition = targetElement.offsetTop - (window.innerHeight / 2) + (targetElement.offsetHeight / 2);
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+  window.addEventListener('scroll', function() {
+      const slides = document.querySelectorAll('.slide');
+      const body = document.body;
+
+      slides.forEach(slide => {
+          const rect = slide.getBoundingClientRect();
+          const slideTop = rect.top;
+          const slideBottom = rect.bottom;
+          const windowHeight = window.innerHeight;
+
+          if (slideTop < windowHeight / 2 && slideBottom > windowHeight / 2) {
+              body.style.backgroundColor = slide.dataset.bgColor;
+          }
+      });
+  });
+</script>
+
+
+</body>
+</html>
+    
+  
+    
+
+
+
+
+
+
